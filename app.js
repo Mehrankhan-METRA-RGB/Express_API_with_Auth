@@ -32,6 +32,7 @@ app.post('/api/login', (req, res) => {
         // , { expiresIn: '30s' }
         , (err, token) => {
             res.json(token);
+            
         });
     // res.json({ message: 'welcome to post API' });
 
