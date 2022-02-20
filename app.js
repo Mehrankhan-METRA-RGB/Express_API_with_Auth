@@ -13,7 +13,7 @@ db.connect(function (err) {
     console.log("KATE Database Connected!");
 });
 module.exports = db;
-const SecretKeyAPI='1...0_Pakistani_$_i_No_one';
+const SecretKeyAPI = '1...0_Pakistani_$_i_No_one';
 ///Token Format
 ///Authorization: Bearer <acces_token>
 
@@ -26,13 +26,14 @@ app.get('/api/get', (req, res) => {
 app.post('/api/login', (req, res) => {
     const user = {
         username: 'mehran1234',
-        email: 'mehran.jan9396@MediaStreamTrack.com',
+        email: 'mehran@metra.dev',
     }
     jwt.sign((user), SecretKeyAPI
         // , { expiresIn: '30s' }
         , (err, token) => {
             res.json(token);
-            
+
+
         });
     // res.json({ message: 'welcome to post API' });
 
@@ -69,6 +70,7 @@ app.post('/signIn', (req, res) => {
     let getAdminData = `SELECT name_at,role_at,email_at FROM blog_admin_tb WHERE email_at='${user['email']}' AND pass_at='${user['password']}'`;
     db.query(checkUser, (err, result) => {
         if (err) { throw err; }
+
         else {
             console.log(result);
             if (result[0]['COUNT(*)'] > 0) {
@@ -80,17 +82,17 @@ app.post('/signIn', (req, res) => {
                             name: resultdata[0]['name_at'],
                             role: resultdata[0]['role_at'],
                         };
-                       
+
                         jwt.sign((user), 'secretkey'
                             // , { expiresIn: '30s' }
                             , (err, token) => {
                                 res.json({ token, result });
                             });
-                     
+
                         console.log("Success");
                     }
                 });
-        
+
             }
             else {
                 res.status(409);
